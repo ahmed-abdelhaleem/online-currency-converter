@@ -12,14 +12,7 @@
     <artifactId>currency-converter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Currency Converter</name>
-    <description>Spring boot Microservice availing three API's</description>
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
+    <description>Spring boot Microservice Currency Converter API</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,11 +61,6 @@
             <groupId>it.ozimov</groupId>
             <artifactId>embedded-redis</artifactId>
             <version>0.7.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.Cloudmersive</groupId>
-            <artifactId>Cloudmersive.APIClient.Java</artifactId>
-            <version>v2.32</version>
         </dependency>
     </dependencies>
 
