@@ -1,5 +1,7 @@
 # online-currency-converter
 
+Swagger: http://localhost:8081/v2/api-docs
+
 Desc: Output the given amount in the target currency
 
 API method: GET
