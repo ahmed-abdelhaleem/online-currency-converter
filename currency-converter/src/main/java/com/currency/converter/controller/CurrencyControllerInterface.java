@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.currency.converter.dto.currency.CurrencyApiResponse;
 import com.currency.converter.errorhandling.ErrorResponse;
+import com.currency.converter.errorhandling.ProcessingException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -39,5 +40,5 @@ public interface CurrencyControllerInterface {
     })
     Mono<CurrencyApiResponse> convertAmountToOtherCurrency(@RequestParam(name = "amount") BigDecimal amount,
                                                            @RequestParam(name = "source-currency") String sourceCurrency,
-                                                           @RequestParam(name = "target-currency") String targetCurrency);
+                                                           @RequestParam(name = "target-currency") String targetCurrency) throws ProcessingException;
 }

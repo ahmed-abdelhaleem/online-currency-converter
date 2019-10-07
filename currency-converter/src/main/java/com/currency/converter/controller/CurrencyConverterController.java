@@ -2,6 +2,8 @@ package com.currency.converter.controller;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Size;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.currency.converter.dto.currency.CurrencyApiResponse;
+import com.currency.converter.errorhandling.ProcessingException;
 import com.currency.converter.service.CurrencyService;
 
 import reactor.core.publisher.Mono;
@@ -29,9 +32,13 @@ public class CurrencyConverterController implements CurrencyControllerInterface{
     @GetMapping(value = "/currency/convert",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    Mono<CurrencyApiResponse> convertAmountToOtherCurrency(@RequestParam(name = "amount") BigDecimal amount,
+    Mono<CurrencyApiResponse> convertAmountToOtherCurrency(@RequestParam(name = "amount") @Size(min=1, max=30)BigDecimal amount,
                                                            @RequestParam(name = "source-currency") String sourceCurrency,
-                                                           @RequestParam(name = "target-currency") String targetCurrency) {
+                                                           @RequestParam(name = "target-currency") String targetCurrency) throws ProcessingException {
+    	
+    	if(amount.doubleValue()<=0) {
+    		throw new ProcessingException(null, "Amount should be greater than zero",HttpStatus.BAD_REQUEST);
+    	}
         return currencyService.convertAmount(amount, sourceCurrency, targetCurrency);
     }
 }
